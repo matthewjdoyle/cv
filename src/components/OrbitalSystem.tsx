@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Planet from './Planet';
 import DetailPanel from './DetailPanel';
 import Satellite from './Satellite';
@@ -28,6 +28,7 @@ const OrbitalSystem: React.FC = () => {
   const [isPanning, setIsPanning] = useState(false);
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
   const [scale, setScale] = useState(1);
+  const [responsiveRadii, setResponsiveRadii] = useState<Record<string, number>>({});
   
   const handleSectionClick = (sectionId: string) => {
     const newActiveSection = activeSection === sectionId ? null : sectionId;
@@ -66,6 +67,72 @@ const OrbitalSystem: React.FC = () => {
     setIsPanning(false);
   };
 
+  // Calculate responsive orbital radii based on window size
+  const calculateResponsiveRadii = useCallback(() => {
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    // Base orbital radii from the original design
+    const baseRadii = {
+      achievements: 200,
+      profile: 240,
+      experience: 280,
+      education: 360,
+      projects: 440,
+      skills: 520,
+    };
+    
+    // Calculate the maximum radius that would fit in the viewport
+    // Use the smaller dimension but be more aggressive - account for planet size and small margin
+    const planetMaxSize = 65; // Largest planet size (skills planet)
+    const margin = 20; // Small margin from screen edge
+    const maxAllowableRadius = (Math.min(windowWidth, windowHeight) / 2) - planetMaxSize - margin;
+    const maxBaseRadius = Math.max(...Object.values(baseRadii));
+    
+    // Define minimum orbital radius to keep planets away from the central star
+    const starSize = 128; // Central star is 128px (w-32 h-32)
+    const minOrbitRadius = starSize / 2 + 60; // Star radius + buffer space
+    
+    // Calculate scaling factor to ensure all planets fit, but allow scaling up too
+    const scaleFactor = maxAllowableRadius / maxBaseRadius;
+    
+    // Apply scaling to all radii with both minimum and maximum constraints
+    const newRadii: Record<string, number> = {};
+    
+    // First pass: calculate scaled radii and check if any hit the minimum
+    const scaledRadii: Record<string, number> = {};
+    let needsRedistribution = false;
+    
+    Object.entries(baseRadii).forEach(([planetId, baseRadius]) => {
+      const scaledRadius = baseRadius * scaleFactor;
+      scaledRadii[planetId] = scaledRadius;
+      if (scaledRadius < minOrbitRadius) {
+        needsRedistribution = true;
+      }
+    });
+    
+    if (needsRedistribution) {
+      // If some planets would be too close to the star, redistribute all planets
+      // to maintain proportional spacing while respecting minimum distance
+      const sortedPlanets = Object.entries(baseRadii).sort(([,a], [,b]) => a - b);
+      const availableSpace = maxAllowableRadius - minOrbitRadius;
+      const totalPlanets = sortedPlanets.length;
+      
+      sortedPlanets.forEach(([planetId, baseRadius], index) => {
+        // Distribute planets evenly in the available space, maintaining relative order
+        const spacing = availableSpace / (totalPlanets - 1);
+        newRadii[planetId] = minOrbitRadius + (spacing * index);
+      });
+    } else {
+      // No redistribution needed, use scaled values
+      Object.entries(scaledRadii).forEach(([planetId, scaledRadius]) => {
+        newRadii[planetId] = scaledRadius;
+      });
+    }
+    
+    setResponsiveRadii(newRadii);
+  }, []);
+
   useEffect(() => {
     setIsAnimationPaused(!!activeSection);
   }, [activeSection]);
@@ -97,10 +164,15 @@ const OrbitalSystem: React.FC = () => {
       }
     };
 
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
-  }, []);
+    const handleResize = () => {
+      updateScale();
+      calculateResponsiveRadii();
+    };
+
+    handleResize(); // Initial calculation
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [calculateResponsiveRadii]);
 
   return (
     <div 
@@ -169,13 +241,16 @@ const OrbitalSystem: React.FC = () => {
             const animationDelay = `${animationDelaySeconds}s`;
             
             const direction = orbitalAnimations[planet.id]?.direction || 'normal';
+            
+            // Use responsive radius if available, fallback to original
+            const currentRadius = responsiveRadii[planet.id] || planet.orbitRadius;
 
             return (
               <div
                 key={planet.id}
                 className={`orbiting-section ${orbitAnimationClass}`}
                 style={{
-                  '--orbit-radius': `${planet.orbitRadius}px`,
+                  '--orbit-radius': `${currentRadius}px`,
                   animationDuration: orbitAnimationDuration,
                   animationDelay: animationDelay,
                   animationPlayState: isAnimationPaused ? 'paused' : 'running',
