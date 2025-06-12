@@ -8,7 +8,7 @@ import { cvPlanets, starProfileData, type Planet as PlanetType } from '@/data';
 import { getAnimationClass, getAnimationDuration, orbitalAnimations } from '@/data/animations/orbitalAnimations';
 
 const centerStar = {
-  name: 'Matthew Doyle PhD',
+  name: 'Matthew Doyle\nPhD',
 };
 
 interface Star {
@@ -85,13 +85,13 @@ const OrbitalSystem: React.FC = () => {
     // Calculate the maximum radius that would fit in the viewport
     // Use the smaller dimension but be more aggressive - account for planet size and small margin
     const planetMaxSize = 65; // Largest planet size (skills planet)
-    const margin = 20; // Small margin from screen edge
+    const margin = 5; // Small margin from screen edge
     const maxAllowableRadius = (Math.min(windowWidth, windowHeight) / 2) - planetMaxSize - margin;
     const maxBaseRadius = Math.max(...Object.values(baseRadii));
     
     // Define minimum orbital radius to keep planets away from the central star
     const starSize = 128; // Central star is 128px (w-32 h-32)
-    const minOrbitRadius = starSize / 2 + 60; // Star radius + buffer space
+    const minOrbitRadius = starSize / 2 + 80; // Star radius + buffer space
     
     // Calculate scaling factor to ensure all planets fit, but allow scaling up too
     const scaleFactor = maxAllowableRadius / maxBaseRadius;
