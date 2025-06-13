@@ -224,9 +224,12 @@ const OrbitalSystem: React.FC = () => {
             }}
           >
             <div className="star-center w-32 h-32 animate-pulse-star cursor-pointer flex flex-col items-center justify-center text-center">
-              <h1 className="text-black font-bold text-lg leading-tight">
-                {centerStar.name}
+              <h1 className="font-bold text-lg leading-tight">
+                Matthew Doyle
               </h1>
+              <span className="font-medium text-sm mt-1 tracking-wide">
+                PhD
+              </span>
             </div>
           </div>
 
