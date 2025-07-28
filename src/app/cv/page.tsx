@@ -39,7 +39,7 @@ const CVPage: React.FC = () => {
           Print / Download PDF
         </button>
       </div>
-      <main className="p-4">
+      <main className="p-4 print:p-0">
         <PrintableCV />
       </main>
     </div>

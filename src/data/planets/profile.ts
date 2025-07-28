@@ -1,16 +1,16 @@
 export const profilePlanet = {
   id: 'profile',
   title: 'Profile',
-  icon: '👤',
+  icon: '',
   orbitRadius: 240,
   size: 60,
   content: {
-    name: 'Matthew Doyle',
+    name: 'Dr Matthew Doyle',
     title: 'Physicist, AI Expert & Software Developer',
     summary:
-      'A highly motivated and adaptable PhD Physicist with extensive experience in numerical simulation, data analysis, and experimental research. Proven ability to lead projects, collaborate effectively in team environments, and communicate complex technical concepts to diverse audiences. Currently expanding expertise in AI and full-stack development, seeking to apply a strong foundation in problem-solving and programming to new challenges in the tech industry.',
+      'Accomplished PhD researcher in quantum fluid physics with expertise in quantum turbulence and superfluid dynamics. Experienced in developing computational simulations, designing experiments, and robust data analysis techniques. Strong background in teaching and mentoring, with proven ability to communicate complex scientific concepts effectively. Known for strong interpersonal skills, collaborative spirit and a supportive approach to teamwork and supervision. Skilled in multiple programming languages and scientific software, with a track record of published research and conference presentations.',
     location: 'Manchester, UK',
-    email: 'matt@matthewd0yle.com',
+    email: 'matthewdoyle2108@gmail.com',
     linkedin: 'matthewd0yle',
     github: 'matthewjdoyle',
     website: 'matthewd0yle.com',

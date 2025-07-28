@@ -20,147 +20,229 @@ const PrintableCV: React.FC = () => {
   const achievements = cvPlanets.find(p => p.id === 'achievements')?.content as Achievement[];
 
   const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h2 className="text-xl font-bold text-gray-800 border-b-2 border-gray-300 pb-1 mb-2">
+    <h2 className="text-xl font-bold text-purple-700 border-b-2 border-purple-700 pb-1 mb-4" style={{ borderBottomWidth: '2px', borderBottomColor: '#7c3aed' }}>
       {children}
     </h2>
   );
 
   return (
-    <div className="bg-white text-gray-800 font-sans p-6 max-w-4xl mx-auto printable-cv my-4">
-      <header className="text-center mb-6">
-        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">{profile.name}</h1>
-        <p className="text-lg text-gray-600 mt-1">{profile.title}</p>
-        <div className="flex justify-center flex-wrap gap-x-3 gap-y-1 mt-2 text-xs text-gray-500">
-          <span>{profile.location}</span>
-          <span className="text-gray-300">&bull;</span>
-          <a href={`mailto:${profile.email}`} className="text-blue-600 hover:underline">{profile.email}</a>
-        </div>
-        <div className="flex justify-center flex-wrap gap-x-3 gap-y-1 mt-2 text-xs text-gray-500">
-          <span className="text-gray-300">&bull;</span>
+    <div className="bg-white text-black font-sans p-8 max-w-4xl mx-auto printable-cv" style={{ fontFamily: 'Arial, sans-serif' }}>
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-purple-700 mb-2" style={{ color: '#7c3aed' }}>
+          {profile.name}
+        </h1>
+        <div className="flex justify-center flex-wrap gap-x-6 gap-y-1 text-sm text-gray-700">
           <span className="flex items-center">
-            💼
-            <a
-              href={`https://linkedin.com/in/${profile.linkedin}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs font-medium transition-colors duration-200 no-print-link ml-1"
-            >
-              {profile.linkedin}
-            </a>
+            <img src="/favicon.svg" alt="Website" className="w-4 h-4 mr-1" />
+            {profile.website}
           </span>
-          <span className="text-gray-300">&bull;</span>
           <span className="flex items-center">
-            🔗
-            <a
-              href={`https://github.com/${profile.github}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs font-medium transition-colors duration-200 no-print-link ml-1"
-            >
-              {profile.github}
-            </a>
+            <img src="/email_icon.png" alt="Email" className="w-4 h-4 mr-1" />
+            {profile.email}
           </span>
-          <span className="text-gray-300">&bull;</span>
           <span className="flex items-center">
-            🌐
-            <a
-              href={`https://${profile.website}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs font-medium transition-colors duration-200 no-print-link ml-1"
-            >
-              {profile.website}
-            </a>
+            <img src="/github_logo.png" alt="GitHub" className="w-4 h-4 mr-1" />
+            {profile.github}
+          </span>
+          <span className="flex items-center">
+            <img src="/linkedin_logo.png" alt="LinkedIn" className="w-4 h-4 mr-1" />
+            {profile.linkedin}
+          </span>
+          <span className="flex items-center">
+            <img src="/location_icon.png" alt="Location" className="w-4 h-4 mr-1" />
+            {profile.location}
           </span>
         </div>
       </header>
 
-      <section className="mb-4">
-        <SectionTitle>Professional Summary</SectionTitle>
-        <p className="text-sm leading-relaxed text-gray-700">{profile.summary}</p>
+      {/* Professional Summary */}
+      <section className="mb-6">
+        <p className="text-sm leading-relaxed text-gray-800">
+          {profile.summary}
+        </p>
       </section>
 
-      <section className="mb-4">
-        <SectionTitle>Professional Experience</SectionTitle>
-        {experience?.map((exp, i) => (
-          <div key={i} className="mb-4 break-inside-avoid">
-            <h3 className="text-lg font-semibold text-gray-800">{exp.position}</h3>
-            <div className="flex justify-between items-baseline mb-0.5">
-              <p className="font-medium text-gray-700 text-sm">{exp.company}, {exp.location}</p>
-              <p className="text-xs text-gray-500 font-mono">{exp.period}</p>
-            </div>
-            <ul className="list-disc list-inside mt-1 text-sm text-gray-700 space-y-1 pl-2">
-              {exp.responsibilities.map((res, j) => <li key={j}>{res}</li>)}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section className="mb-4">
+      {/* Education Section */}
+      <section className="mb-6">
         <SectionTitle>Education</SectionTitle>
         {education?.map((edu, i) => (
           <div key={i} className="mb-4 break-inside-avoid">
-            <h3 className="text-lg font-semibold text-gray-800">{edu.degree}</h3>
-            <p className="font-medium text-gray-700 text-sm">{edu.institution}</p>
-            <p className="text-xs text-gray-500 font-mono">{edu.period} | Grade: {edu.grade}</p>
-            {edu.specialization && <p className="text-sm text-gray-600 mt-1">Specialization: {edu.specialization}</p>}
-            {edu.thesis && <p className="text-sm text-gray-600 italic mt-1">Thesis: {edu.thesis}</p>}
+            <div className="flex justify-between items-start">
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-black">{edu.degree}</h3>
+                <p className="text-sm text-gray-800">
+                  {edu.institution}
+                  {edu.specialization && `, ${edu.specialization}`}
+                  {edu.grade && edu.grade !== edu.specialization && (
+                    <span className="italic">, {edu.grade}</span>
+                  )}
+                </p>
+              </div>
+              <p className="text-sm text-gray-600 font-mono ml-4">{edu.period}</p>
+            </div>
           </div>
         ))}
       </section>
 
-      <section className="mb-4">
-        <SectionTitle>Skills</SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 break-inside-avoid">
-          <div>
-            <h3 className="text-md font-semibold text-gray-700 mb-1">Technical Skills</h3>
-            <div className="flex flex-wrap gap-1">
-                {skills?.technical.map((skill, i) => <span key={i} className="bg-gray-200 text-gray-800 text-xs font-medium px-2 py-0.5 rounded-full">{skill}</span>)}
+      {/* Experience Section */}
+      <section className="mb-6">
+        <SectionTitle>Experience</SectionTitle>
+        {experience?.map((exp, i) => (
+          <div key={i} className="mb-4 break-inside-avoid">
+            <div className="flex justify-between items-start mb-1">
+              <h3 className="text-lg font-bold text-black">{exp.position}, {exp.company}</h3>
+              <div className="text-right">
+                <p className="text-sm text-gray-700">{exp.location}</p>
+                <p className="text-sm text-gray-600 font-mono">{exp.period}</p>
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 className="text-md font-semibold text-gray-700 mb-1">Software & Tools</h3>
-            <div className="flex flex-wrap gap-1">
-                {skills?.software.map((skill, i) => <span key={i} className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-0.5 rounded-full">{skill}</span>)}
-            </div>
-          </div>
-          <div className="md:col-span-2">
-            <h3 className="text-md font-semibold text-gray-700 mb-1">Soft Skills</h3>
-            <ul className="list-none space-y-1 text-sm">
-              {skills?.soft.map((s, i) => (
-                <li key={i}><strong className="font-medium">{s.title}:</strong> <span className="text-gray-600">{s.description}</span></li>
+            <ul className="list-disc list-inside text-sm text-gray-800 space-y-1 ml-4">
+              {exp.responsibilities.map((res, j) => (
+                <li key={j} className="text-sm">{res}</li>
               ))}
             </ul>
+          </div>
+        ))}
+      </section>
+
+      {/* Research Projects Section */}
+      <section className="mb-6">
+        <SectionTitle>Research Projects</SectionTitle>
+        {projects?.filter(proj => 
+          proj.name.includes('PhD Research') || 
+          proj.name.includes('MSci Thesis') || 
+          proj.name.includes('Marching Cubes')
+        ).map((proj, i) => (
+          <div key={i} className="mb-4 break-inside-avoid">
+            <div className="flex justify-between items-start mb-1">
+              <h3 className="text-lg font-bold text-black">{proj.name}</h3>
+              <p className="text-sm text-gray-600 font-mono">{proj.status}</p>
+            </div>
+            <ul className="list-disc list-inside text-sm text-gray-800 space-y-1 ml-4">
+              {proj.highlights.map((highlight, j) => (
+                <li key={j} className="text-sm">{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      {/* Other Projects Section */}
+      <section className="mb-6">
+        <SectionTitle>Other Projects</SectionTitle>
+        {projects?.filter(proj => 
+          proj.name.includes('Banner Generator') || 
+          proj.name.includes('Conference Organisation')
+        ).map((proj, i) => (
+          <div key={i} className="mb-4 break-inside-avoid">
+            <div className="flex justify-between items-start mb-1">
+              <h3 className="text-lg font-bold text-black">{proj.name}</h3>
+              <p className="text-sm text-gray-600 font-mono">{proj.status}</p>
+            </div>
+            <ul className="list-disc list-inside text-sm text-gray-800 space-y-1 ml-4">
+              {proj.highlights.map((highlight, j) => (
+                <li key={j} className="text-sm">{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      {/* Publications Section */}
+      <section className="mb-6">
+        <SectionTitle>Publications</SectionTitle>
+        {achievements?.filter(ach => ach.doi || ach.value?.includes('Journal')).map((ach, i) => (
+          <div key={i} className="mb-4 break-inside-avoid">
+            <div className="flex items-start">
+              <span className="text-sm text-gray-700 font-mono mr-4 min-w-[60px]">
+                {ach.year}{i === 0 ? '*' : ''}
+              </span>
+              <div className="flex-1">
+                <p className="text-sm font-bold text-black mb-1">{ach.title}</p>
+                <p className="text-sm text-gray-700 ml-4 mb-1">
+                  {ach.description.split(', ').map((author, index) => {
+                    const isBold = author.includes('M. J. Doyle') || author.includes('M. Doyle');
+                    return (
+                      <span key={index}>
+                        {isBold ? <strong>{author}</strong> : author}
+                        {index < ach.description.split(', ').length - 1 ? ', ' : ''}
+                      </span>
+                    );
+                  })}
+                </p>
+                <div className="flex items-center ml-4">
+                  <p className="text-sm text-gray-600 italic">{ach.value}</p>
+                  {ach.doi && (
+                    <span className="ml-2 text-sm text-purple-600">
+                      DOI: {ach.doi}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Achievements Section */}
+      <section className="mb-6">
+        <SectionTitle>Achievements</SectionTitle>
+        {achievements?.filter(ach => !ach.doi && !ach.value?.includes('Journal')).map((ach, i) => (
+          <div key={i} className="mb-3 break-inside-avoid">
+            <div className="flex justify-between items-start">
+              <div className="flex-1">
+                <p className="text-sm font-bold text-black">{ach.title}</p>
+                <p className="text-sm text-gray-700">{ach.description}</p>
+                {ach.committee && <p className="text-sm text-gray-600 italic">{ach.committee}</p>}
+              </div>
+              <p className="text-sm text-gray-600 font-mono ml-4">{ach.year}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Skills Section */}
+      <section className="mb-6">
+        <SectionTitle>Technologies</SectionTitle>
+        <div className="space-y-2">
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Simulation:</span>
+            <span className="text-sm text-gray-700">FORTRAN, Python, C++, OpenFOAM, OpenMP, CUDA, MPI.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Data Analysis:</span>
+            <span className="text-sm text-gray-700">Python, matplotlib, seaborn, pandas, numpy, scipy, TensorFlow, OpenCV, ggplot, C++, ROOT, OriginLab.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Data Structures:</span>
+            <span className="text-sm text-gray-700">CSV, XML, JSON, YAML, SQL.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Automation:</span>
+            <span className="text-sm text-gray-700">Git, Linux, Bash & PowerShell scripts, Python, Selenium, LabVIEW.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Web Development:</span>
+            <span className="text-sm text-gray-700">HTML, CSS, JavaScript, React, Vue, Tailwind, TypeScript, MySQL.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Other Software:</span>
+            <span className="text-sm text-gray-700">GitHub, Teams, Slack, LaTeX, Notion, Powerpoint, Excel, G-Suite, Inkscape.</span>
+          </div>
+          <div className="flex">
+            <span className="text-sm font-bold text-gray-800 min-w-[140px]">Laboratory Equipment:</span>
+            <span className="text-sm text-gray-700">Lasers, cryogenic apparatus, vacuum technology, intensified cameras, optical fibres.</span>
           </div>
         </div>
       </section>
 
-      <section className="mb-4">
-        <SectionTitle>Projects</SectionTitle>
-        {projects?.map((proj, i) => (
-          <div key={i} className="mb-4 break-inside-avoid">
-            <h3 className="text-lg font-semibold text-gray-800">{proj.name} - <span className="text-sm font-normal text-gray-600">{proj.status}</span></h3>
-            <p className="text-xs text-gray-500 italic mb-1">{proj.technologies.join(' · ')}</p>
-            <p className="text-sm text-gray-700 mb-1">{proj.description}</p>
-            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
-              {proj.highlights.map((h, j) => <li key={j}>{h}</li>)}
-            </ul>
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <SectionTitle>Achievements & Awards</SectionTitle>
-        <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 pl-2">
-          {achievements?.map((ach, i) => (
-            <li key={i}>
-              <strong className="font-semibold">{ach.title}</strong> ({ach.year})
-              {ach.prize && <span className="font-medium text-green-700 ml-2">[{ach.prize}]</span>}
-              <p className="pl-4 text-gray-600 text-xs">{ach.description}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* Footer Note */}
+      <footer className="mt-8 pt-4 border-t border-gray-300">
+        <p className="text-xs text-gray-600 italic">
+          * Paper has not yet been published
+        </p>
+      </footer>
     </div>
   );
 };

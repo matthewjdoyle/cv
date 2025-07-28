@@ -49,4 +49,5 @@ export interface Achievement {
   prize?: string;
   citation?: string;
   committee?: string;
+  doi?: string;
 } 

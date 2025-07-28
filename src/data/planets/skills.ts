@@ -3,7 +3,7 @@ import { Planet } from '..';
 export const skillsPlanet: Omit<Planet, 'planetColors' | 'color'> = {
   id: 'skills',
   title: 'Skills',
-  icon: '🧠',
+  icon: '',
   orbitRadius: 520,
   size: 65,
   hasRing: true,
@@ -11,12 +11,17 @@ export const skillsPlanet: Omit<Planet, 'planetColors' | 'color'> = {
   ringSize: 130,
   content: {
     technical: [
-      'Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'OpenCV', 'Scikit-learn',
-      'SciPy', 'FORTRAN', 'MATLAB', 'SQL', 'Bash', 'HTML', 'CSS', 'JavaScript', 'ReactJS', 'NodeJS', 'Next.js', 'TypeScript', 'Tailwind', 'XML', 'API development'
+      'FORTRAN', 'Python', 'C++', 'OpenFOAM', 'OpenMP', 'CUDA', 'MPI',
+      'matplotlib', 'seaborn', 'pandas', 'numpy', 'scipy', 'TensorFlow', 'OpenCV', 'ggplot',
+      'ROOT', 'OriginLab', 'CSV', 'XML', 'JSON', 'YAML', 'SQL',
+      'Git', 'Linux', 'Bash', 'PowerShell', 'Selenium', 'LabVIEW',
+      'HTML', 'CSS', 'JavaScript', 'React', 'Vue', 'Tailwind', 'TypeScript', 'MySQL'
     ],
     software: [
-      'Git', 'VS Code', 'LaTeX', 'Microsoft Office', 'Notion', 'OriginLab',
-      'VNC Services', 'Blender', 'DaVinci Resolve', 'AWS Hosting', 'Zapier'
+      'GitHub', 'Teams', 'Slack', 'LaTeX', 'Notion', 'Powerpoint', 'Excel', 'G-Suite', 'Inkscape'
+    ],
+    laboratory: [
+      'Lasers', 'cryogenic apparatus', 'vacuum technology', 'intensified cameras', 'optical fibres'
     ],
     soft: [
       {
