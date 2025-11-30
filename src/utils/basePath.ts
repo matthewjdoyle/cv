@@ -2,7 +2,7 @@
  * Get the base path for assets.
  * This uses the NEXT_PUBLIC_BASE_PATH environment variable set in next.config.js
  * - In development: empty string (root)
- * - In production on GitHub Pages: /webcv
+ * - In production on GitHub Pages: /cv
  */
 export const getBasePath = (): string => {
   return process.env.NEXT_PUBLIC_BASE_PATH || '';

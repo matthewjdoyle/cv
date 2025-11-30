@@ -2,7 +2,7 @@
 
 // Use basePath only in production (not during local development)
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/webcv' : '';
+const basePath = isProd ? '/cv' : '';
 
 const nextConfig = {
   output: 'export',
@@ -10,7 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   basePath: basePath,
-  assetPrefix: isProd ? '/webcv/' : '',
+  assetPrefix: isProd ? '/cv/' : '',
   trailingSlash: true,
   // Make basePath available to client-side code
   env: {
