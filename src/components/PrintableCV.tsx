@@ -10,6 +10,7 @@ import {
   Project,
   Achievement,
 } from '@/data/types';
+import { getAssetPath } from '@/utils/basePath';
 
 const PrintableCV: React.FC = () => {
   const profile = starProfileData.content as Profile;
@@ -34,23 +35,23 @@ const PrintableCV: React.FC = () => {
         </h1>
         <div className="flex justify-center flex-wrap gap-x-6 gap-y-1 text-sm text-gray-700">
           <span className="flex items-center">
-            <img src="/favicon.svg" alt="Website" className="w-4 h-4 mr-1" />
+            <img src={getAssetPath('/favicon.svg')} alt="Website" className="w-4 h-4 mr-1" />
             {profile.website}
           </span>
           <span className="flex items-center">
-            <img src="/email_icon.png" alt="Email" className="w-4 h-4 mr-1" />
+            <img src={getAssetPath('/email_icon.png')} alt="Email" className="w-4 h-4 mr-1" />
             {profile.email}
           </span>
           <span className="flex items-center">
-            <img src="/github_logo.png" alt="GitHub" className="w-4 h-4 mr-1" />
+            <img src={getAssetPath('/github_logo.png')} alt="GitHub" className="w-4 h-4 mr-1" />
             {profile.github}
           </span>
           <span className="flex items-center">
-            <img src="/linkedin_logo.png" alt="LinkedIn" className="w-4 h-4 mr-1" />
+            <img src={getAssetPath('/linkedin_logo.png')} alt="LinkedIn" className="w-4 h-4 mr-1" />
             {profile.linkedin}
           </span>
           <span className="flex items-center">
-            <img src="/location_icon.png" alt="Location" className="w-4 h-4 mr-1" />
+            <img src={getAssetPath('/location_icon.png')} alt="Location" className="w-4 h-4 mr-1" />
             {profile.location}
           </span>
         </div>

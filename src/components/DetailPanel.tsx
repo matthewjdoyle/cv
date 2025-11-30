@@ -4,7 +4,7 @@ import React, { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Planet as PlanetType } from '@/data';
 import { planetStyles } from '@/data/planetStyles';
-import Image from 'next/image';
+import { getAssetPath } from '@/utils/basePath';
 
 interface DetailPanelProps {
   section: PlanetType;
@@ -200,19 +200,19 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ section, onClose }) => {
                 <div className="space-y-3 text-gray-200">
                   <div className="flex items-center group hover:bg-white/5 p-2 rounded-lg transition-colors duration-200">
                     <div className="w-5 h-5 mr-3 flex-shrink-0">
-                      <Image src="/location_icon.png" alt="Location" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+                      <img src={getAssetPath('/location_icon.png')} alt="Location" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                     <span className="text-sm sm:text-base group-hover:text-white transition-colors duration-200">{section.content.location}</span>
                   </div>
                   <div className="flex items-center group hover:bg-white/5 p-2 rounded-lg transition-colors duration-200">
                     <div className="w-5 h-5 mr-3 flex-shrink-0">
-                      <Image src="/email_icon.png" alt="Email" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+                      <img src={getAssetPath('/email_icon.png')} alt="Email" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                     <span className="text-sm sm:text-base group-hover:text-white transition-colors duration-200">{section.content.email}</span>
                   </div>
                   <div className="flex items-center group hover:bg-white/5 p-2 rounded-lg transition-colors duration-200">
                     <div className="w-5 h-5 mr-3 flex-shrink-0">
-                      <Image src="/linkedin_logo.png" alt="LinkedIn" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+                      <img src={getAssetPath('/linkedin_logo.png')} alt="LinkedIn" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                     <a
                       href={`https://linkedin.com/in/${section.content.linkedin}`}
@@ -227,7 +227,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ section, onClose }) => {
                   </div>
                   <div className="flex items-center group hover:bg-white/5 p-2 rounded-lg transition-colors duration-200">
                     <div className="w-5 h-5 mr-3 flex-shrink-0">
-                      <Image src="/github_logo.png" alt="GitHub" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+                      <img src={getAssetPath('/github_logo.png')} alt="GitHub" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                     <a
                       href={`https://github.com/${section.content.github}`}
@@ -242,7 +242,7 @@ const DetailPanel: React.FC<DetailPanelProps> = ({ section, onClose }) => {
                   </div>
                   <div className="flex items-center group hover:bg-white/5 p-2 rounded-lg transition-colors duration-200">
                     <div className="w-5 h-5 mr-3 flex-shrink-0">
-                      <Image src="/favicon.svg" alt="Website" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
+                      <img src={getAssetPath('/favicon.svg')} alt="Website" width={20} height={20} className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-200" />
                     </div>
                     <a
                       href={`https://${section.content.website}`}
