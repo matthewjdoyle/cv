@@ -13,7 +13,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
+        sans: ['var(--font-outfit)', ...fontFamily.sans],
+        display: ['var(--font-outfit)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
+        'sm': ['0.875rem', { lineHeight: '1.6', letterSpacing: '0.01em' }],
+        'base': ['1rem', { lineHeight: '1.7', letterSpacing: '0' }],
+        'lg': ['1.125rem', { lineHeight: '1.6', letterSpacing: '-0.01em' }],
+        'xl': ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+        '2xl': ['1.5rem', { lineHeight: '1.4', letterSpacing: '-0.02em' }],
+        '3xl': ['1.875rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
+        '4xl': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
       },
       textShadow: {
         sm: '0 1px 2px var(--tw-shadow-color)',
@@ -36,6 +49,8 @@ module.exports = {
         'float': 'float 6s ease-in-out infinite',
         'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
         'expand-to-orbit': 'expand-to-orbit 1s cubic-bezier(0.65, 0, 0.35, 1) forwards',
+        'satellite-glow': 'satellite-glow 3s ease-in-out infinite',
+        'solar-panel-shimmer': 'solar-panel-shimmer 4s ease-in-out infinite',
       },
       keyframes: {
         orbit: {
@@ -108,6 +123,18 @@ module.exports = {
           '0%': { transform: 'rotate(0deg) translateX(0) scaleX(0.625) scaleY(1.43)' },
           '100%': { transform: 'rotate(-360deg) translateX(0) scaleX(0.625) scaleY(1.43)' },
         },
+        'satellite-glow': {
+          '0%, 100%': { 
+            filter: 'drop-shadow(0 0 8px rgba(74, 144, 226, 0.6)) drop-shadow(0 0 16px rgba(74, 144, 226, 0.3))',
+          },
+          '50%': { 
+            filter: 'drop-shadow(0 0 12px rgba(74, 144, 226, 0.8)) drop-shadow(0 0 24px rgba(74, 144, 226, 0.5))',
+          },
+        },
+        'solar-panel-shimmer': {
+          '0%, 100%': { opacity: 0.85 },
+          '50%': { opacity: 1 },
+        },
       },
       colors: {
         'star-gold': '#FFD700',
@@ -129,4 +156,4 @@ module.exports = {
       );
     }),
   ],
-} 
+}

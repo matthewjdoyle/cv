@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Planet from './Planet';
 import DetailPanel from './DetailPanel';
 import Satellite from './Satellite';
@@ -8,7 +9,7 @@ import { cvPlanets, starProfileData, type Planet as PlanetType } from '@/data';
 import { getAnimationClass, getAnimationDuration, orbitalAnimations } from '@/data/animations/orbitalAnimations';
 
 const centerStar = {
-  name: 'Matthew Doyle\nPhD',
+  name: 'Dr Matthew Doyle',
 };
 
 interface Star {
@@ -225,11 +226,9 @@ const OrbitalSystem: React.FC = () => {
           >
             <div className="star-center w-32 h-32 animate-pulse-star cursor-pointer flex flex-col items-center justify-center text-center">
               <h1 className="font-bold text-lg leading-tight">
-                Matthew Doyle
+                Dr Matthew Doyle
               </h1>
-              <span className="font-medium text-sm mt-1 tracking-wide">
-                PhD
-              </span>
+
             </div>
           </div>
 
@@ -283,18 +282,21 @@ const OrbitalSystem: React.FC = () => {
       </div>
 
       {/* Detail Panel for Active Section */}
-      {activeSection && (
-        <DetailPanel
-          section={
-            activeSection === 'profile'
-              ? starProfileData
-              : cvPlanets.find((s) => s.id === activeSection)!
-          }
-          onClose={() => {
-            setActiveSection(null);
-          }}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {activeSection && (
+          <DetailPanel
+            key={activeSection}
+            section={
+              activeSection === 'profile'
+                ? starProfileData
+                : cvPlanets.find((s) => s.id === activeSection)!
+            }
+            onClose={() => {
+              setActiveSection(null);
+            }}
+          />
+        )}
+      </AnimatePresence>
 
       <Satellite />
     </div>

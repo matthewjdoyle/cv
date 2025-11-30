@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Outfit, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ 
+// Primary font - Outfit: modern, geometric, distinctive
+const outfit = Outfit({ 
   subsets: ['latin'], 
-  variable: '--font-inter',
+  variable: '--font-outfit',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
+})
+
+// Mono font for technical details
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+  weight: ['400', '500', '600'],
 })
 
 export const metadata: Metadata = {
@@ -26,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   )
-} 
+}

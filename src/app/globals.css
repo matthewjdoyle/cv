@@ -4,7 +4,11 @@
 
 @layer base {
   html {
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-outfit), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
   
   body {
@@ -14,12 +18,77 @@
     background: linear-gradient(to bottom,  #000f0d, #0c010e 50%, #000f0d);
     min-height: 100vh;
     position: relative;
+    font-weight: 400;
+  }
+  
+  /* Typography hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 { font-weight: 700; }
+  h2 { font-weight: 600; }
+  h3 { font-weight: 600; }
+  
+  /* Monospace for technical content */
+  code, kbd, pre, .font-mono {
+    font-family: var(--font-mono), 'Fira Code', 'SF Mono', monospace;
+    font-feature-settings: 'liga' 1;
+  }
+  
+  /* Improved text selection */
+  ::selection {
+    background: rgba(74, 144, 226, 0.3);
+    color: inherit;
   }
 
   /* When the CV page is active, override body styles for scrolling */
   body:has(.cv-page-container) {
     overflow: auto;
     background: #f3f4f6; /* Equivalent to bg-gray-100 */
+  }
+
+  /* Custom scrollbar for modal content */
+  .modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 116, 139, 0.5) transparent;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(100, 116, 139, 0.6), rgba(71, 85, 105, 0.6));
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgba(148, 163, 184, 0.8), rgba(100, 116, 139, 0.8));
+    background-clip: padding-box;
+  }
+
+  /* Ensure smooth animations with hardware acceleration */
+  .modal-content,
+  .modal-content * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  /* Smooth transitions for all interactive elements */
+  a, button, [role="button"] {
+    transition-property: color, background-color, border-color, transform, box-shadow, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 }
 
@@ -307,17 +376,7 @@
     pointer-events: none;
   }
   
-  .orbit-path {
-    position: absolute;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    top: 50%;
-    left: 50%;
-    pointer-events: none;
-    box-shadow: 
-      inset 0 0 20px rgba(255, 255, 255, 0.05),
-      0 0 10px rgba(255, 255, 255, 0.03);
-    animation: orbit-glow 8s ease-in-out infinite alternate;
-  }
+
   
   .orbiting-section {
     position: absolute;
@@ -491,15 +550,18 @@
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 0.625rem;
-    font-weight: bold;
+    font-family: var(--font-outfit), system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     text-shadow: 
       1px 1px 2px rgba(0, 0, 0, 0.9),
       0 0 8px rgba(0, 0, 0, 0.7);
     white-space: nowrap;
     margin-top: 8px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 3px 8px;
     border-radius: 12px;
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.1);
