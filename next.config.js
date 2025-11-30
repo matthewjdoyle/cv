@@ -1,19 +1,21 @@
 /** @type {import('next').NextConfig} */
 
-// Detect if we're building for GitHub Pages
-const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
-const repoName = 'webcv'; // Change this to your repo name
+// Use basePath only in production (not during local development)
+const isProd = process.env.NODE_ENV === 'production';
+const basePath = isProd ? '/webcv' : '';
 
 const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  // Set basePath for GitHub Pages deployment
-  basePath: isGitHubPages ? `/${repoName}` : '',
-  assetPrefix: isGitHubPages ? `/${repoName}/` : '',
-  // Ensure trailing slashes for static export
+  basePath: basePath,
+  assetPrefix: isProd ? '/webcv/' : '',
   trailingSlash: true,
+  // Make basePath available to client-side code
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 }
 
 module.exports = nextConfig

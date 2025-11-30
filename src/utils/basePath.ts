@@ -1,18 +1,11 @@
 /**
  * Get the base path for assets.
- * In development: empty string (root)
- * In production on GitHub Pages: /webcv
+ * This uses the NEXT_PUBLIC_BASE_PATH environment variable set in next.config.js
+ * - In development: empty string (root)
+ * - In production on GitHub Pages: /webcv
  */
 export const getBasePath = (): string => {
-  // Check if we're on GitHub Pages by looking at the URL
-  if (typeof window !== 'undefined') {
-    const { hostname, pathname } = window.location;
-    // If hosted on github.io and path starts with repo name
-    if (hostname.includes('github.io') && pathname.startsWith('/webcv')) {
-      return '/webcv';
-    }
-  }
-  return '';
+  return process.env.NEXT_PUBLIC_BASE_PATH || '';
 };
 
 /**
@@ -25,4 +18,3 @@ export const getAssetPath = (path: string): string => {
   const normalizedPath = path.startsWith('/') ? path : `/${path}`;
   return `${basePath}${normalizedPath}`;
 };
-
